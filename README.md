@@ -27,6 +27,7 @@ Angularjs service to generate a random male or female firstname and surname.
       nameGenerator.generateName(firstInitial,secondInitial,gender).then(function(response){
         console.log(response);
       });
+      
       ```
 * The parameters of the function are all strings.
 * The response is a string with the random name and surname seperated by a space.
