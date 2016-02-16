@@ -12,7 +12,6 @@ Angularjs service to generate a random male or female firstname and surname.
 
 * Add `random-name-generator` to your application's module dependencies.
 * Add the `nameGenerator` service in the controller or directive dependencies u want to use the generator in.
-* Adjust the right path to the `name.json` file on line `6` of the service.
 * Include script in your HTML.
 
       ```html
@@ -23,12 +22,15 @@ Angularjs service to generate a random male or female firstname and surname.
 ## Example
 
 * If you want to use the service u need to make sure the service is added in your dependencies.
-* If that is done u can call the generateName function, example below:
+* If that is done u can call the initialize function and after the generateName function, example below:
       ```
+      nameGenerator.initialize(path);
       nameGenerator.generateName(firstInitial,secondInitial,gender).then(function(response){
         console.log(response);
+      },function(reason){
+       console.log(reason);
       });
       
       ```
-* The parameters of the function are all strings.
+* The parameters of the functions are all strings.
 * The response is a string with the random name and surname seperated by a space.
