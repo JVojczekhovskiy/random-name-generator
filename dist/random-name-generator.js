@@ -28,4 +28,4 @@ angular.module('random-name-generator',[])
     return deferred.promise;
   }
 });
-})()
+})();
