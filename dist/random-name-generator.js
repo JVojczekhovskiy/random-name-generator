@@ -2,9 +2,11 @@
 angular.module('random-name-generator',[])
 .service('nameGenerator',function($q,$http){
   var self = this;
-  self.names;
   self.initialize = function(p){
     self.path = p;
+    $http.get(self.path+'?nocache'+new Date().getTime()).then(function(response){
+      self.names = response.data;
+    });
   }
 
   self.generateName = function(in1,in2,gender){
