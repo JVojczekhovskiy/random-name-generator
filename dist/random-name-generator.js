@@ -2,6 +2,7 @@
 angular.module('random-name-generator',[])
 .service('nameGenerator',function($q,$http){
   var self = this;
+  self.names;
   self.initialize = function(p){
     self.path = p;
   }
