@@ -1,14 +1,16 @@
 (function(){
 angular.module('random-name-generator',[])
 .service('nameGenerator',function($q,$http){
-  this.initialize = function(p){
-    this.path = p;
+  var self = this;
+  self.initialize = function(p){
+    self.path = p;
   }
 
-  this.generateName = function(in1,in2,gender){
+  self.generateName = function(in1,in2,gender){
     var deferred = $q.defer();
-    if(this.path!=undefined){
-      deferred.resolve($http.get(this.path+'?nocache'+new Date().getTime()).then(function(response){
+    if(self.path!=undefined){
+      deferred.resolve($http.get(self.path+'?nocache'+new Date().getTime()).then(function(response){
+        self.names = response.data
         var temp1 =[],temp2 =[];
         if(gender=="male"){
           for(var i=0;i<response.data.firstNames.male.length;i++)
@@ -28,21 +30,18 @@ angular.module('random-name-generator',[])
     return deferred.promise;
   }
 
-  this.checkNickName = function(nickname) {
-    var deferred = $q.defer();
+  self.checkNickName = function(nickname) {
     var firstName = nickname.split(" ")[0];
     var lastName = nickname.split(" ")[1];
     var valid = [false, false];
-    deferred.resolve($http.get(this.path+'?nocache'+new Date().getTime()).then(function(response){
-      for (var i = 0; i < response.data.firstNames.male.length; i++) if (response.data.firstNames.male[i] == firstName) valid[0] = true;
-      for (var i = 0; i < response.data.lastNames.length; i++) if (response.data.lastNames[i] == lastName) valid[1] = true;
-      if (valid[0]&&valid[1]){
-        return true;
-      } else {
-        return false;
-      }
-    }));
-    return deferred.promise;
+
+    for (var i = 0; i < self.names.firstNames.male.length; i++) if (self.names.firstNames.male[i] == firstName) valid[0] = true;
+    for (var i = 0; i < self.names.lastNames.length; i++) if (self.names.lastNames[i] == lastName) valid[1] = true;
+    if (valid[0]&&valid[1]){
+      return true;
+    } else {
+      return false;
+    }
   }
 });
 })();
