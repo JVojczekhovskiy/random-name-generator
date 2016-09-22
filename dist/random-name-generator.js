@@ -24,7 +24,8 @@ angular.module('random-name-generator',[])
         }
         for(var i=0;i<response.data.lastNames.length;i++)if(response.data.lastNames[i].charAt(0)==in2.toUpperCase())temp2.push(response.data.lastNames[i]);
         if (temp1.length<1 && temp2.length<1) {
-          console.log('EMPTY');
+          for(var i=0;i<response.data.firstNames.male.length;i++)temp1.push(response.data.firstNames.male[i]);
+          for(var i=0;i<response.data.lastNames.length;i++)temp2.push(response.data.lastNames[i]);
         }
         return temp1[Math.floor(Math.random()*(temp1.length))]+" "+temp2[Math.floor(Math.random()*(temp2.length))];
       },function(error){
