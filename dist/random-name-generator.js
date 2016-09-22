@@ -36,7 +36,7 @@ angular.module('random-name-generator',[])
     deferred.resolve($http.get(this.path+'?nocache'+new Date().getTime()).then(function(response){
       for (var i = 0; i < response.data.firstNames.male.length; i++) if (response.data.firstNames.male[i] == firstName) valid[0] = true;
       for (var i = 0; i < response.data.lastNames.length; i++) if (esponse.data.lastNames[i] == lastName) valid[1] = true;
-      if (valid[0]&&valid[1]) return true else return false;
+      (valid[0]&&valid[1])? return true : return false;
     }));
     return deferred.promise;
   }
