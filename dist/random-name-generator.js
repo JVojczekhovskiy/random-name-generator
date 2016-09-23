@@ -23,8 +23,10 @@ angular.module('random-name-generator',[])
           if(response.data.firstNames.female[i].charAt(0)==in1.toUpperCase())temp1.push(response.data.firstNames.female[i]);
         }
         for(var i=0;i<response.data.lastNames.length;i++)if(response.data.lastNames[i].charAt(0)==in2.toUpperCase())temp2.push(response.data.lastNames[i]);
-        if (temp1.length<1 && temp2.length<1) {
+        if (temp1.length<1) {
           for(var i=0;i<response.data.firstNames.male.length;i++)temp1.push(response.data.firstNames.male[i]);
+        }
+        if (temp2.length<1) {
           for(var i=0;i<response.data.lastNames.length;i++)temp2.push(response.data.lastNames[i]);
         }
         return temp1[Math.floor(Math.random()*(temp1.length))]+" "+temp2[Math.floor(Math.random()*(temp2.length))];
