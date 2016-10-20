@@ -4,7 +4,7 @@ angular.module('random-name-generator',[])
   var self = this;
   self.initialize = function(p){
     self.path = p;
-    $http({method: 'GET', url: self.path, params: { 'nocache': new Date().getTime() }}).then(function(response){
+    $http.get(self.path, { headers: { 'Cache-Control' : 'no-cache' } }).then(function(response){
       self.names = response.data;
     });
   }
@@ -12,7 +12,7 @@ angular.module('random-name-generator',[])
   self.generateName = function(in1,in2,gender){
     var deferred = $q.defer();
     if(self.path!=undefined){
-      deferred.resolve($http({method: 'GET', url: self.path, params: { 'nocache': new Date().getTime() }}).then(function(response){
+      deferred.resolve($http.get(self.path, { headers: { 'Cache-Control' : 'no-cache' } })).then(function(response){
         self.names = response.data
         var temp1 =[],temp2 =[];
         if(gender=="male"){
